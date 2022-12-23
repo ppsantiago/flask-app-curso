@@ -1,2 +1,2 @@
 # flask-app-curso
-curso Flask Platzi
+curso Flask Platzi para paracticas de Flask
