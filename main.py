@@ -1,18 +1,12 @@
 from app import init_app
 from flask import render_template, request, redirect, make_response, session, url_for, flash
-from flask_wtf import FlaskForm
-from wtforms.fields import SearchField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from app.forms.forms import  LoginForm
 import unittest
 
 app = init_app()
 todos = ['Actualizar software', 'Leer documentacion', 'Listar requerimientos']
 
 
-class LoginForm(FlaskForm):
-    username = SearchField('Nombre de usuario', validators=[DataRequired()])
-    password = PasswordField('Contraseña', validators=[DataRequired()])
-    submit = SubmitField('Enviar')
 
 
 @app.cli.command()
@@ -34,15 +28,13 @@ def internal_server_error(error):
 @app.route('/')
 def index():
     user_ip = request.remote_addr
-    response = make_response(redirect('/hello'))
-    # response.set_cookie('user_ip', user_ip)
+    response = make_response(redirect('/inicio'))
     session['user_ip'] = user_ip
-
     return response
 
 
-@app.route('/hello', methods=['GET', 'POST'])
-def hello():
+@app.route('/inicio', methods=['GET', 'POST'])
+def inicio():
     username = session.get('username')
     user_ip = session.get('user_ip')
     login_form = LoginForm()
