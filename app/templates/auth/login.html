@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% import 'bootstrap4/form.html' as render_form %}
+{% block title %}
+    {{super()}}
+    Login
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="form-group">
+        <form action="{{ url_for('inicio') }}" method="POST">
+            {{ login_form.csrf_token }}
+            {{ login_form.username.label }}
+            {{ login_form.username(class="form-control") }}
+            {{ login_form.password.label }}
+            {{ login_form.password(class="form-control") }}
+            <br>
+            {{ login_form.submit(class="form-control btn btn-dark") }}
+        </form>
+    </div>
+</div>
+
+
+{% endblock body %}

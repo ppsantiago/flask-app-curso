@@ -34,3 +34,15 @@ class MainTest(TestCase):
         }
         response = self.client.post(url_for('inicio'), data=fake_form)
         self.assertStatus(response, 302)
+        
+    def test_auth_blooprint_exist(self):
+        self.assertIn('auth', self.app.blueprints)
+        
+    def test_auth_login_get(self):
+        response = self.client.get(url_for('auth.login'))
+        self.assert200(response)
+
+
+    def test_auth_login_template(self):
+        self.client.get(url_for('auth.login'))
+        self.assert_template_used('auth/login.html')
