@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    {{super()}}
+    404
+{% endblock title %}
+
+{% block body %}
+
+<body>
+    <h1>¡ No hay nada por aqui !</h1>
+    <img src="{{ url_for('static', filename='img/500.png') }}" class="error-img" alt="">
+    <div class="container">
+        <p>{{ error }}</p>
+    </div>
+</body>
+{% endblock body %}

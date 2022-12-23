@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% import 'macros.html' as macros %}
+{% import 'bootstrap4/form.html' as render_form %}
+
+
+{% block title %}
+{{super()}}
+Home
+{% endblock title %}
+
+{% block body %}
+<div class="container ">
+    <div class="title-home">
+        <h1>It this is my web site</h1> 
+    </div>
+    {% if user_ip %}
+        {{user_ip}}
+    {% else %}
+        <a href="{{ url_for('index') }}">go Home</a>
+    {% endif %}
+    {% if username %}
+        <h3>Hola, {{ username }} </h3>
+    {% else %}
+        <div class="container">
+            <div class="form-group">
+                <form action="{{ url_for('inicio') }}" method="POST">
+                    {{ login_form.csrf_token }}
+                    {{ login_form.username.label }}
+                    {{ login_form.username(class="form-control") }}
+                    {{ login_form.password.label }}
+                    {{ login_form.password(class="form-control") }}
+                    <br>
+                    {{ login_form.submit(class="form-control btn btn-dark") }}
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <ul>
+            {% for todo in todos %}
+            {{ macros.render_todo(todo)}}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock body %}
